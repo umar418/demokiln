@@ -7,7 +7,10 @@ import { FRAME_POLICY } from "../capture/snapshot.js";
 export const VERSION = "0.0.1";
 
 function asset(name: string): string {
-  return readFileSync(fileURLToPath(new URL(`../player/${name}`, import.meta.url)), "utf8");
+  // A browser treats every line ending as a line feed before it checks a script or style
+  // against the policy. Files checked out on Windows use two-character line endings, so
+  // without this the player would be refused by its own policy.
+  return readFileSync(fileURLToPath(new URL(`../player/${name}`, import.meta.url)), "utf8").replace(/\r\n?/g, "\n");
 }
 
 function sha256(content: string): string {

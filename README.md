@@ -59,7 +59,7 @@ npx demokiln build demo.yaml
 - **Privacy.** Password fields and recognised card fields are always covered. `mask` covers anything else and removes its text from the copy; `replace` swaps real text for sample text, including in attributes. The build stops if a likely credential is on screen.
 - **A locked-down file.** One HTML file that loads nothing from the network. Captured pages are stripped of scripts and shown in a frame that cannot run code. Captions are plain text.
 - **Stale-demo check.** `demokiln check` re-runs the steps against your app. It exits 1 if a step no longer works and 2 if anything differs from the last build: a screen, a caption, where a hotspot points, a chapter or a setting. It writes a before-and-after page.
-- **Repeatable.** The app is shown one fixed date and time and a fixed random sequence, so a page that prints "today" or draws random ids builds the same way twice. Set `time` to choose the date.
+- **Repeatable.** The app's clock starts at a set date and time and it gets a fixed random sequence, so a page that prints "today" or draws random ids builds the same way twice. Set `time` to choose the date. The clock still runs, so a time shown to the second will differ; mask it.
 - **Recorder.** `demokiln record <url>` opens a browser; click through your app and it writes the steps file.
 - **Other outputs.** `demokiln export` writes a step-by-step Markdown guide, one image per screen with the click target outlined, and a JSON description.
 - **Small screens, autoplay, embedding.** On a phone the player moves in on the part that matters. `autoplay` advances the demo until the viewer takes over. The build prints an iframe snippet for your site.

@@ -151,7 +151,7 @@ export async function main(argv: string[], write: (line: string) => void = conso
     const kept = result.steps.filter((step) => step.structure).length;
     if (kept === total) out(`  All ${total} screens kept as real pages (sharp at any size).`);
     else if (kept === 0) out(`  All ${total} screens are screenshots.`);
-    else out(`  ${kept} of ${total} screens kept as real pages (sharp at any size); the other ${total - kept} are screenshots.`);
+    else out(`  ${kept} of ${total} screens kept as real pages (sharp at any size); ${total - kept === 1 ? "the other one is a screenshot" : `the other ${total - kept} are screenshots`}.`);
     out(`Wrote ${target} (${total} screens, ${(Buffer.byteLength(html) / 1024 / 1024).toFixed(2)} MB)`);
     if (!values["no-baseline"]) {
       const dir = baselineDirFor(target);

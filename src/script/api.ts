@@ -53,8 +53,9 @@ export interface DemoOptions {
   /** Share of pixels a structure capture may differ from the screenshot before it is discarded. Default 0.002. */
   fidelity?: number;
   /**
-   * The date and time the app sees while it is captured, e.g. "2026-01-15T09:30:00Z". Defaults to
-   * the moment the build starts. Fixing it makes a page that shows dates give the same demo each build.
+   * The date and time the app's clock starts at for the capture, e.g. "2026-01-15T09:30:00Z".
+   * Defaults to the moment the build starts. The clock then runs normally, so a page that shows
+   * the date, or the time to the minute, gives the same demo each build; seconds will differ.
    */
   time?: string;
   /** Credential pattern ids to ignore when they are known false positives. */

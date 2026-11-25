@@ -36,7 +36,7 @@ export interface RunResult {
   accent?: string;
   cta?: { label: string; url: string };
   autoplay?: number;
-  /** The date and time the app saw during capture, as an ISO string. */
+  /** The date and time the app's clock started at for the capture, as an ISO string. */
   time: string;
   /** Pixel density of the captures. */
   scale: number;
@@ -91,8 +91,9 @@ export async function runDemo(definition: DemoDefinition, runOptions: RunOptions
       storageState: options.storageState,
     });
     context.setDefaultTimeout(stepTimeout);
-    // The app sees one fixed date and time, so a screen that prints "today" is the same in every build.
-    await context.clock.setFixedTime(new Date(time));
+    // The app's clock starts at a chosen date and time and then runs normally. It is not frozen:
+    // code that measures elapsed time (animations, debounced handlers) would never finish.
+    await context.clock.install({ time: new Date(time) });
     watchResponses(context, tables);
     const activity = await watchActivity(context);
     const page = await context.newPage();

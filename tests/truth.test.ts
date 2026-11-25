@@ -187,9 +187,9 @@ describe("check tells the truth", () => {
     expect(() => compareWithBaseline(readBaseline(dir), result)).toThrow(/step-001\.png is not a readable image/);
   });
 
-  it("does not call an unchanged app out of date because it shows the time or a random number", async () => {
+  it("does not call an unchanged app out of date because it shows the date, the time to the minute, or a random number", async () => {
     const clock = `${HEAD}</head><body><h1>Dashboard</h1><p id="now"></p><p id="id"></p><button id="go">Refresh</button>
-      <script>document.getElementById("now").textContent = new Date().toISOString(); document.getElementById("id").textContent = "ref-" + Math.random();</script></body></html>`;
+      <script>document.getElementById("now").textContent = new Date().toISOString().slice(0, 16); document.getElementById("id").textContent = "ref-" + Math.random();</script></body></html>`;
     const page = await servePage(clock);
     const dir = temp();
     const script = join(dir, "demo.yaml");
@@ -203,7 +203,7 @@ describe("check tells the truth", () => {
       // With the time written in the script, two builds are the same file.
       const fixed = () => runDemo(demo({ url: page.url, scale: 1, time: "2026-03-04T05:06:07Z" }, async ({ step }) => step.click("#go", "Refresh"))).then(renderHtml);
       const first = await fixed();
-      expect(first).toContain("2026-03-04T05:06:07.000Z");
+      expect(first).toContain("2026-03-04T05:06");
       expect((await fixed()) === first).toBe(true);
     } finally {
       await page.stop();

@@ -51,7 +51,7 @@ export function exportDemo(result: RunResult, dir: string): ExportSummary {
   const names = result.steps.map((_step, index) => `step-${String(index + 1).padStart(2, "0")}.png`);
   result.steps.forEach((step, index) => {
     writeFileSync(join(imagesDir, names[index]!), annotate(step, result.accent));
-    files.push(join("images", names[index]!));
+    files.push(`images/${names[index]}`);
   });
 
   const lines = [`# ${escapeMarkdown(result.title)}`, ""];

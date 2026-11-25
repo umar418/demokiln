@@ -1,6 +1,6 @@
 import { mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, resolve, sep } from "node:path";
 import { pathToFileURL } from "node:url";
 import { chromium } from "playwright";
 import { PNG } from "pngjs";
@@ -208,6 +208,17 @@ describe("options", () => {
   });
 });
 
+describe("line endings", () => {
+  it("builds a working demo even when the player files use Windows line endings", () => {
+    // The policy hash must be computed over the text as the browser will see it.
+    const html = renderHtml({
+      title: "T", viewport: { width: 800, height: 600 }, time: new Date(0).toISOString(), scale: 1,
+      tables: { styles: [], resources: ["data:,"] }, steps: [],
+    });
+    expect(html.includes("\r")).toBe(false);
+  });
+});
+
 describe("output file", () => {
   async function open(html: string) {
     const file = join(mkdtempSync(join(tmpdir(), "demokiln-")), "demo.html");
@@ -356,12 +367,12 @@ describe("helpers", () => {
   });
 
   it("never serves a file outside the preview folder", () => {
-    const root = "/srv/demo";
-    expect(resolveInside(root, "/demo.html")).toBe("/srv/demo/demo.html");
-    for (const path of ["/../etc/passwd", "/%2e%2e/%2e%2e/etc/passwd", "/a/../../b", "/%00", "/%E0%A4%A"]) {
+    const root = resolve("srv-demo");
+    expect(resolveInside(root, "/demo.html")).toBe(join(root, "demo.html"));
+    for (const path of ["/../etc/passwd", "/%2e%2e/%2e%2e/etc/passwd", "/a/../../b", "/%00", "/%E0%A4%A", "/..%5c..%5cx", "/..\\..\\x"]) {
       const resolved = resolveInside(root, path);
-      expect(resolved === undefined || resolved.startsWith("/srv/demo")).toBe(true);
+      expect(resolved === undefined || resolved === root || resolved.startsWith(root + sep), path).toBe(true);
     }
-    expect(resolveInside(root, "/../demo-secrets/x")).toBeUndefined();
+    expect(resolveInside(root, "/../srv-demo-secrets/x")).toBeUndefined();
   });
 });
