@@ -22,3 +22,15 @@ jobs:
       - run: npm run build
       - run: npm test
       - run: node dist/cli/index.js --version
+      # Install the packaged tool into an empty folder and run it, to catch anything
+      # that only works from a development checkout (such as a missing dependency).
+      - name: Packaged install works
+        shell: bash
+        run: |
+          npm pack
+          mkdir "$RUNNER_TEMP/try" && cp demokiln-*.tgz "$RUNNER_TEMP/try/" && cd "$RUNNER_TEMP/try"
+          npm init -y
+          npm install ./demokiln-*.tgz playwright
+          npx demokiln --version
+          npx demokiln init tour.yaml
+          npx demokiln doctor

@@ -26,11 +26,13 @@
   "scripts": {
     "build": "tsc -p . && node scripts/copy-assets.mjs",
     "test": "vitest run",
-    "typecheck": "tsc -p . --noEmit"
+    "typecheck": "tsc -p . --noEmit",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "jiti": "^2.4.2",
     "parse5": "^7.3.0",
+    "pngjs": "^7.0.0",
     "yaml": "^2.9.1"
   },
   "peerDependencies": {
@@ -40,8 +42,29 @@
     "@types/node": "^22.10.0",
     "@types/pngjs": "^6.0.5",
     "playwright": "^1.65.0",
-    "pngjs": "^7.0.0",
     "typescript": "^5.7.0",
     "vitest": "^3.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umar418/demokiln.git"
+  },
+  "homepage": "https://github.com/umar418/demokiln#readme",
+  "bugs": {
+    "url": "https://github.com/umar418/demokiln/issues"
+  },
+  "keywords": [
+    "interactive-demo",
+    "product-demo",
+    "product-tour",
+    "demo-builder",
+    "playwright",
+    "arcade-alternative",
+    "storylane-alternative",
+    "navattic-alternative",
+    "supademo-alternative",
+    "walkthrough",
+    "onboarding",
+    "cli"
+  ]
 }
