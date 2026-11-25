@@ -1,0 +1,4 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Widget</title><link rel="stylesheet" href="style.css"></head><body>
+<main><h1>Widget</h1><x-badge></x-badge><p><button id="ok" type="button">OK</button></p></main>
+<script>customElements.define("x-badge",class extends HTMLElement{constructor(){super();this.attachShadow({mode:"open"}).innerHTML="<p style='padding:20px;background:#fde68a;font:700 28px sans-serif'>Inside a web component</p>";}});</script>
+</body></html>

@@ -1,0 +1,47 @@
+{
+  "name": "demokiln",
+  "version": "0.0.1",
+  "description": "Interactive product demos built from a script, and rebuilt when your product changes. Open-source alternative to Arcade, Storylane, Supademo and Navattic.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "demokiln": "dist/cli/index.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p . && node scripts/copy-assets.mjs",
+    "test": "vitest run",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "dependencies": {
+    "jiti": "^2.4.2",
+    "parse5": "^7.3.0",
+    "yaml": "^2.9.1"
+  },
+  "peerDependencies": {
+    "playwright": ">=1.45"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/pngjs": "^6.0.5",
+    "playwright": "^1.65.0",
+    "pngjs": "^7.0.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}

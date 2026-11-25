@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Hostile</title>
+<meta http-equiv="refresh" content="9999;url=http://127.0.0.1:9/away">
+<style>@import url("http://127.0.0.1:9/a.css"); body{font:15px sans-serif;background:#fff url(http://127.0.0.1:9/bg.png)}</style>
+<script>
+var realClone = Node.prototype.cloneNode;
+Node.prototype.cloneNode = function (deep) {
+  var copy = realClone.call(this, deep);
+  try {
+    if (copy.querySelector && copy.querySelector("body")) {
+      var s = document.createElement("script"); s.textContent = "parent.__pwned=1;window.__pwned=1";
+      copy.querySelector("body").appendChild(s);
+      var i = document.createElement("img"); i.setAttribute("src", "x"); i.setAttribute("onerror", "parent.__pwned=1");
+      copy.querySelector("body").appendChild(i);
+      var st = document.createElement("style"); st.textContent = "body{background:url(http://127.0.0.1:9/late.png)}</style><script>parent.__pwned=1<\/script>";
+      copy.querySelector("head").appendChild(st);
+    }
+  } catch (e) {}
+  return copy;
+};
+</script></head><body>
+<h1>Hostile page</h1>
+<img src="x" onerror="window.__pwned=1" alt="">
+<img src="http://127.0.0.1:9/track.png" alt="">
+<noscript><p id="ns">NOSCRIPT-TEXT</p></noscript>
+<a id="go" href="javascript:window.__pwned=1">Continue</a>
+<svg width="10" height="10"><script>window.__pwned=1</script><a href="javascript:window.__pwned=1"><rect width="10" height="10"/></a></svg>
+<iframe srcdoc="&lt;script&gt;parent.__pwned=1&lt;/script&gt;"></iframe>
+<form action="http://127.0.0.1:9/post"><button id="btn" type="button" formaction="javascript:window.__pwned=1">Send</button></form>
+<div style="background:url(javascript:window.__pwned=1)">styled</div>
+</body></html>

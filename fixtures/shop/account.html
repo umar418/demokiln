@@ -1,0 +1,8 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Account</title><link rel="stylesheet" href="style.css"></head><body>
+<header><strong>Northwind</strong><nav><a href="index.html">Home</a><a href="reports.html">Reports</a><a href="account.html">Account</a></nav></header>
+<main><h1>Account</h1>
+<label for="pw">Password</label><input id="pw" type="password" value="hunter2-secret">
+<p>API key: <code id="key"></code></p>
+<button id="save" type="button">Save</button></main>
+<script>if(location.search.indexOf("key=1")>=0){document.getElementById("key").textContent="ghp_"+"A1b2".repeat(9);}else{document.getElementById("key").textContent="not set";}</script>
+</body></html>

@@ -1,0 +1,14 @@
+export { demo, DemoConfigError, VIEWPORTS } from "./script/api.js";
+export type { DemoContext, DemoDefinition, DemoOptions, StepApi, Target, Viewport } from "./script/api.js";
+export { runDemo, DemoStepError } from "./capture/run.js";
+export type { CapturedStep, Hotspot, RunOptions, RunResult, StepKind } from "./capture/run.js";
+export { renderHtml } from "./build/html.js";
+export { loadScript } from "./script/load.js";
+export { scanForSecrets, SecretFoundError } from "./privacy/secrets.js";
+export { parseYamlDemo } from "./script/yaml.js";
+export { baselineDirFor, compareWithBaseline, readBaseline, renderCheckReport, writeBaseline } from "./check/check.js";
+export type { Baseline, ScreenChange } from "./check/check.js";
+export { annotate, escapeMarkdown, exportDemo } from "./export/export.js";
+export { attachRecorder, tidy, toStepsFile } from "./script/record.js";
+export type { RecordedStep } from "./script/record.js";
+export { embedSnippet } from "./build/html.js";

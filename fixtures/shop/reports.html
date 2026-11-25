@@ -1,0 +1,7 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Reports</title><link rel="stylesheet" href="style.css"></head><body>
+<header><strong>Northwind</strong><nav><a href="index.html">Home</a><a href="reports.html">Reports</a><a href="account.html">Account</a></nav></header>
+<main><h1>Reports</h1><p>Choose a start date to see orders.</p>
+<label for="from">From</label><input id="from" placeholder="YYYY-MM-DD"><button id="apply" type="button">Apply</button>
+<div id="result"></div></main>
+<script>document.getElementById("apply").addEventListener("click",function(){document.getElementById("result").textContent="Showing 12 orders since "+(document.getElementById("from").value||"the start")+".";});</script>
+</body></html>

@@ -1,0 +1,20 @@
+# The same tour as demo.ts, written as plain steps.
+# Serve the sample shop first:  npx demokiln preview fixtures/shop/index.html -p 4319
+url: http://127.0.0.1:4319/index.html
+title: Northwind in one minute
+replace:
+  Real Customer Ltd: Acme Inc
+cta:
+  label: Start free
+  url: https://example.com/signup
+steps:
+  - note: This is your home screen. The week's numbers are always up to date.
+  - click: Reports
+    caption: Open your reports
+  - fill: From
+    value: 2026-01-01
+    caption: Pick a start date
+  - click: Apply
+    caption: Apply the filter
+  - note: Your orders appear here.
+    at: "#result"
