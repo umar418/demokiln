@@ -365,7 +365,7 @@ The app being captured is treated as untrusted, as are steps files and recorded 
 - **Captions and titles are plain text** in the demo, the check report, the exported guide and the terminal.
 - **Files stay where they belong.** `preview` binds to this machine only, serves only the demo file, and does not follow links out of its folder. `check` refuses a baseline whose images are links.
 
-To report a security problem, open a private security advisory on the GitHub repository.
+To report a security problem, see [SECURITY.md](SECURITY.md).
 
 ## Limits
 

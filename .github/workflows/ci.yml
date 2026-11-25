@@ -3,6 +3,10 @@ on:
   push:
     branches: [main]
   pull_request:
+# The workflow only reads the code. It cannot write to the repository or publish anything.
+permissions:
+  contents: read
+
 jobs:
   test:
     strategy:
@@ -13,6 +17,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
