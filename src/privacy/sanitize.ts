@@ -36,8 +36,17 @@ function looksExecutable(value: string): boolean {
  * and inline images or fonts, and the text cannot close its own style element.
  */
 export function sanitizeCss(css: string): string {
-  let out = css.replace(/<\/(style)/gi, "<\\/$1").replace(/<!--|-->/g, "");
-  out = out.replace(/@import\b[^;{}]*;?/gi, "");
+  // Removing a piece of text can join what was around it into the very thing that was removed
+  // ("@im" + "port" after an "@import" between them is deleted). So removals repeat until
+  // nothing more changes, and if they never settle the style is dropped entirely.
+  let out = css;
+  for (let round = 0; ; round++) {
+    const before = out;
+    out = out.replace(/<!--|--!?>/g, "").replace(/@import\b[^;{}]*;?/gi, "");
+    if (out === before) break;
+    if (round > 20) return "";
+  }
+  out = out.replace(/<\/(style)/gi, "<\\/$1");
   out = out.replace(/expression\s*\(/gi, "invalid(").replace(/-moz-binding\s*:/gi, "invalid:").replace(/behavior\s*:/gi, "invalid:");
   out = out.replace(/url\(\s*(?:"([^"]*)"|'([^']*)'|([^)]*))\s*\)/gi, (_match, a, b, c) => {
     const target = String(a ?? b ?? c ?? "").trim();

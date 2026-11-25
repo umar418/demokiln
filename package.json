@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "jiti": "^2.4.2",
-    "parse5": "^7.3.0",
+    "parse5": "^8.1.1",
     "pngjs": "^7.0.0",
     "yaml": "^2.9.1"
   },
@@ -39,11 +39,11 @@
     "playwright": ">=1.45"
   },
   "devDependencies": {
-    "@types/node": "^22.10.0",
+    "@types/node": "^26.6.7",
     "@types/pngjs": "^6.0.5",
     "playwright": "^1.65.0",
     "typescript": "^5.7.0",
-    "vitest": "^3.0.0"
+    "vitest": "^5.1.1"
   },
   "repository": {
     "type": "git",

@@ -299,5 +299,11 @@ describe("hostile pages", () => {
     const css = sanitizeCss('@import "http://evil/a.css"; a{background:url(http://evil/x.png)} b{background:url("dk-res-7f3a:1:")} c{width:expression(alert(1))} </style><script>x</script>');
     expect(css).not.toMatch(/evil|@import|expression\(|<\/style/i);
     expect(css).toContain('url("dk-res-7f3a:1:")');
+
+    // Text that only becomes dangerous once a removal has joined its two halves.
+    for (const tricky of ['@im@import "x";port url(http://evil/a.css);', "a{}<!<!---- b{}", "a{}--!--!>> b{}", "@@import x;import url(http://evil/b.css);", "<!-<!---<!---- x"]) {
+      const cleaned = sanitizeCss(tricky);
+      expect(cleaned, tricky).not.toMatch(/@import|<!--|-->|--!>|evil/i);
+    }
   });
 });
